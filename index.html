@@ -3,136 +3,141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Krishi Tools Store</title>
+  <title>Rental & Bill Dashboard</title>
+
+  <!-- ✅ jsPDF from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4fff4;
+      background: linear-gradient(to right, #eef2f3, #c9d6ff);
+      padding: 2rem;
     }
-
     h1 {
       text-align: center;
-      padding: 20px;
-      background-color: #008000;
-      color: white;
-      margin: 0;
+      margin-bottom: 2rem;
+      color: #222;
     }
-
-    .product-grid {
+    .dashboard {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
     }
-
-    .product-card {
+    .card {
       background: white;
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0, 128, 0, 0.2);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
     }
-
-    .product-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 25px rgba(0, 128, 0, 0.3);
+    .card:hover {
+      transform: scale(1.02);
     }
-
-    .product-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
+    .info {
+      margin: 0.5rem 0;
+      color: #333;
     }
-
-    .product-info {
-      padding: 15px;
-    }
-
-    .product-title {
-      font-size: 1.1rem;
+    .paid {
+      color: green;
       font-weight: bold;
-      margin-bottom: 10px;
-      color: #006400;
     }
-
-    .product-price {
-      color: #000;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .order-button {
-      background-color: #008000;
+    .button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #4a90e2;
       color: white;
-      padding: 10px 15px;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 1rem;
       cursor: pointer;
-      transition: background-color 0.3s;
-      text-decoration: none;
-      display: inline-block;
     }
-
-    .order-button:hover {
-      background-color: #006400;
+    .button:hover {
+      background: #357abd;
+    }
+    .toggle-history {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background: none;
+      border: none;
+      color: #007BFF;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: underline;
+    }
+    .history {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.8rem;
+      background: #f4f7fa;
+      border-radius: 0.7rem;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .history-item {
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+      color: #333;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scaleY(0.95); }
+      to { opacity: 1; transform: scaleY(1); }
     }
   </style>
 </head>
 <body>
 
-<h1>🌿 Krishi Tools Store</h1>
-
-<div class="product-grid">
-
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x200/?sprayer" alt="Sprayer" class="product-img"/>
-    <div class="product-info">
-      <div class="product-title">Hand Sprayer Pump</div>
-      <div class="product-price">₹499</div>
-      <a class="order-button" href="https://wa.me/918010942439?text=I%20want%20to%20order%20Hand%20Sprayer%20Pump" target="_blank">Order on WhatsApp</a>
+<h1>Rental & Electricity Bills - Aug 2025</h1>
+<div class="dashboard">
+  <div class="card">
+    <h2>Ram Pawar (Room 1)</h2>
+    <div class="info">Rent: ₹4000</div>
+    <div class="info">Electricity: ₹700</div>
+    <div class="info paid">Status: Paid</div>
+    <button class="button" onclick="generatePDF('Ram Pawar', 'Room 1', 4000, 700)">Download Receipt</button>
+    <button class="toggle-history" onclick="toggleHistory(this)">View History</button>
+    <div class="history">
+      <div class="history-item">Jul 2025: Rent ₹4000, Elec ₹600, Paid</div>
+      <div class="history-item">Jun 2025: Rent ₹4000, Elec ₹500, Paid</div>
     </div>
   </div>
 
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x200/?fertilizer" alt="Fertilizer" class="product-img"/>
-    <div class="product-info">
-      <div class="product-title">Organic Fertilizer</div>
-      <div class="product-price">₹299</div>
-      <a class="order-button" href="https://wa.me/918010942439?text=I%20want%20to%20order%20Organic%20Fertilizer" target="_blank">Order on WhatsApp</a>
-    </div>
-  </div>
-
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x200/?seed" alt="Seeds" class="product-img"/>
-    <div class="product-info">
-      <div class="product-title">Vegetable Seeds Pack</div>
-      <div class="product-price">₹149</div>
-      <a class="order-button" href="https://wa.me/918010942439?text=I%20want%20to%20order%20Seeds%20Pack" target="_blank">Order on WhatsApp</a>
-    </div>
-  </div>
-
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x200/?pesticide" alt="Pesticide" class="product-img"/>
-    <div class="product-info">
-      <div class="product-title">Eco Pesticide</div>
-      <div class="product-price">₹349</div>
-      <a class="order-button" href="https://wa.me/918010942439?text=I%20want%20to%20order%20Eco%20Pesticide" target="_blank">Order on WhatsApp</a>
-    </div>
-  </div>
-
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x200/?tractor-tool" alt="Tool Kit" class="product-img"/>
-    <div class="product-info">
-      <div class="product-title">Farmer Tool Kit</div>
-      <div class="product-price">₹799</div>
-      <a class="order-button" href="https://wa.me/918010942439?text=I%20want%20to%20order%20Farmer%20Tool%20Kit" target="_blank">Order on WhatsApp</a>
-    </div>
-  </div>
-
+  <!-- You can duplicate the card for more tenants -->
 </div>
+
+<script>
+  // Toggle payment history
+  function toggleHistory(button) {
+    const historyDiv = button.nextElementSibling;
+    if (historyDiv.style.display === "block") {
+      historyDiv.style.display = "none";
+      button.innerText = "View History";
+    } else {
+      historyDiv.style.display = "block";
+      button.innerText = "Hide History";
+    }
+  }
+
+  // Download PDF receipt
+  async function generatePDF(name, room, rent, elec) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const date = new Date().toLocaleDateString();
+
+    doc.setFontSize(16);
+    doc.text("Rental Receipt - Aug 2025", 20, 20);
+    doc.setFontSize(12);
+    doc.text(Date: ${date}, 20, 30);
+    doc.text(Name: ${name}, 20, 40);
+    doc.text(Room: ${room}, 20, 50);
+    doc.text(Rent: ₹${rent}, 20, 60);
+    doc.text(Electricity: ₹${elec}, 20, 70);
+    doc.text(Total Paid: ₹${rent + elec}, 20, 80);
+    doc.text("Status: Paid", 20, 90);
+    doc.text("Thank you for the payment!", 20, 105);
+
+    doc.save(${name.replace(/\s/g, '_')}_Receipt_Aug2025.pdf);
+  }
+</script>
 
 </body>
 </html>
