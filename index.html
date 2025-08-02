@@ -3,49 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KrishiTools - Agri Equipment</title>
+  <title>KrishiTools - Agri Equipment Shop</title>
   <style>
-    body { font-family: Arial; margin: 0; padding: 0; background: #f4f4f4; }
-    header { background: #27ae60; color: white; padding: 20px; text-align: center; }
-    .container { padding: 20px; }
-    .product { background: white; margin: 10px 0; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .product img { width: 100%; max-width: 200px; }
-    .product h3 { margin: 10px 0; }
-    .product p { margin: 5px 0; }
-    .order-btn { background: #27ae60; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; display: inline-block; }
-    footer { text-align: center; padding: 20px; font-size: 14px; color: #666; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+
+    .product-card img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .product-card h3 {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .product-card p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .order-btn {
+      background-color: #2e7d32;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #ddd;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 24px;
+      }
+    }
   </style>
 </head>
 <body>
+  <header>
+    <h1>KrishiTools - Smart Farming Solutions</h1>
+    <p>Trusted platform to buy agriculture tools and equipment</p>
+  </header>
 
-<header>
-  <h1>🌾 KrishiTools</h1>
-  <p>Your Trusted Agriculture Tools Seller</p>
-</header>
+  <div class="container">
+    <div class="products">
+      
+      <!-- Product 1 -->
+      <div class="product-card">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2023/2/FV/DA/NX/87663685/agricultural-spray-pump-500x500.jpg" alt="Spray Pump">
+        <h3>Manual Spray Pump</h3>
+        <p>₹1,250</p>
+        <a class="order-btn" href="https://wa.me/91XXXXXXXXXX?text=I'm%20interested%20in%20Manual%20Spray%20Pump" target="_blank">Order on WhatsApp</a>
+      </div>
 
-<div class="container">
+      <!-- Product 2 -->
+      <div class="product-card">
+        <img src="https://5.imimg.com/data5/KD/UX/QD/SELLER-8423745/power-weeder-500x500.jpg" alt="Power Weeder">
+        <h3>Power Weeder</h3>
+        <p>₹32,500</p>
+        <a class="order-btn" href="https://wa.me/91XXXXXXXXXX?text=I'm%20interested%20in%20Power%20Weeder" target="_blank">Order on WhatsApp</a>
+      </div>
 
-  <div class="product">
-    <h3>🔧 16L Sprayer</h3>
-    <img src="https://via.placeholder.com/200x150" alt="Sprayer">
-    <p><strong>Price:</strong> ₹1200</p>
-    <a class="order-btn" href="https://wa.me/91XXXXXXXXXX?text=I%20want%20to%20order%2016L%20Sprayer%20for%20₹1200" target="_blank">Order on WhatsApp</a>
+      <!-- Product 3 -->
+      <div class="product-card">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2022/8/OA/QL/DN/26364512/mini-cultivator-500x500.jpg" alt="Mini Cultivator">
+        <h3>Mini Cultivator</h3>
+        <p>₹18,000</p>
+        <a class="order-btn" href="https://wa.me/91XXXXXXXXXX?text=I'm%20interested%20in%20Mini%20Cultivator" target="_blank">Order on WhatsApp</a>
+      </div>
+
+    </div>
   </div>
 
-  <div class="product">
-    <h3>🪓 Sickle (Durable Steel)</h3>
-    <img src="https://via.placeholder.com/200x150" alt="Sickle">
-    <p><strong>Price:</strong> ₹150</p>
-    <a class="order-btn" href="https://wa.me/91XXXXXXXXXX?text=I%20want%20to%20order%20Sickle%20for%20₹150" target="_blank">Order on WhatsApp</a>
-  </div>
-
-  <!-- Add more products like this -->
-
-</div>
-
-<footer>
-  📞 Call/WhatsApp: +91-XXXXXXXXXX | © 2025 KrishiTools
-</footer>
-
+  <footer>
+    <p>&copy; 2025 KrishiTools | All Rights Reserved</p>
+  </footer>
 </body>
 </html>
